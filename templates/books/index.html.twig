@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Books{% endblock %}
+
+{% block body %}
+    <h1>Books</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>BOOK_ID</th>
+                <th>BOOK_NAME</th>
+                <th>BOOK_DESCRIPTION</th>
+                <th>BOOK_PUBLISH_YEAR</th>
+                <th>BOOK_COVER_FILE_NAME</th>
+                <th>BOOK_COVER_FILE_CONTENTS</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.BOOKID }}</td>
+                <td>{{ book.BOOKNAME }}</td>
+                <td>{{ book.BOOKDESCRIPTION }}</td>
+                <td>{{ book.BOOKPUBLISHYEAR ? book.BOOKPUBLISHYEAR|date('Y-m-d') : '' }}</td>
+                <td>{{ book.BOOKCOVERFILENAME }}</td>
+                <td>{{ book.BOOKCOVERFILECONTENTS }}</td>
+                <td>
+                    <a href="{{ path('app_books_show', {'id': book.id}) }}">show</a>
+                    <a href="{{ path('app_books_edit', {'id': book.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_books_new') }}">Create new</a>
+{% endblock %}
